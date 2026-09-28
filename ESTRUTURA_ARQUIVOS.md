@@ -1,55 +1,55 @@
 # Estrutura de Arquivos - DESPACHANTE CAC PROF
 
-## ð Mapeamento de Arquivos
+## 📁 Mapeamento de Arquivos
 
-Todos os arquivos estÃ£o salvos no scratchpad com nomes prefixados. Aqui estÃ¡ o mapeamento correto para sua estrutura de pasta:
+Todos os arquivos estão salvos no scratchpad com nomes prefixados. Aqui está o mapeamento correto para sua estrutura de pasta:
 
 ### Raiz do Projeto
 ```
 despachante-cac-prof/
-âââ package.json                    â copiar src-package.json (sem renomear)
-âââ vite.config.ts                  â copiar src-vite.config.ts (sem renomear)
-âââ tsconfig.json                   â copiar arquivo
-âââ tsconfig.node.json              â criar cÃ³pia de tsconfig.json
-âââ tailwind.config.js              â copiar arquivo
-âââ postcss.config.js               â copiar arquivo
-âââ .env.local                       â criar de .env.example
-âââ .gitignore                       â criar (veja abaixo)
-âââ index.html                       â copiar arquivo
-âââ README.md                        â criar (documentaÃ§Ã£o)
-âââ GUIA_IMPLEMENTACAO.md            â copiar arquivo
-âââ ESTRUTURA_ARQUIVOS.md            â este arquivo
-âââ setup_database.sql               â USAR NO SUPABASE (nÃ£o copiar para src)
-âââ node_modules/                    â criado por npm install
-âââ dist/                            â criado por npm run build
-âââ src/
-    âââ main.tsx                     â renomear de src-main.tsx
-    âââ App.tsx                      â renomear de src-App.tsx
-    âââ index.css                    â renomear de src-index.css
-    âââ supabase.ts                  â renomear de src-supabase.ts
-    âââ vite-env.d.ts                â criar (arquivo vazio ou com tipos)
-    âââ components/
-    â   âââ Button.tsx               â renomear de src-components-Button.tsx
-    â   âââ Card.tsx                 â renomear de src-components-Card.tsx
-    â   âââ Input.tsx                â renomear de src-components-Input.tsx
-    â   âââ Modal.tsx                â renomear de src-components-Modal.tsx
-    â   âââ index.ts                 â renomear de src-components-index.ts
-    âââ pages/
-    â   âââ Login.tsx                â renomear de src-pages-Login.tsx
-    â   âââ Dashboard.tsx             â renomear de src-pages-Dashboard.tsx
-    âââ store/
-    â   âââ auth.ts                  â renomear de src-store-auth.ts
-    âââ hooks/
-    â   âââ (criarÃ¡ conforme necessÃ¡rio)
-    âââ utils/
-    â   âââ (criarÃ¡ conforme necessÃ¡rio)
-    âââ types/
-        âââ (criarÃ¡ conforme necessÃ¡rio)
+├── package.json                    ← copiar src-package.json (sem renomear)
+├── vite.config.ts                  ← copiar src-vite.config.ts (sem renomear)
+├── tsconfig.json                   ← copiar arquivo
+├── tsconfig.node.json              ← criar cópia de tsconfig.json
+├── tailwind.config.js              ← copiar arquivo
+├── postcss.config.js               ← copiar arquivo
+├── .env.local                       ← criar de .env.example
+├── .gitignore                       ← criar (veja abaixo)
+├── index.html                       ← copiar arquivo
+├── README.md                        ← criar (documentação)
+├── GUIA_IMPLEMENTACAO.md            ← copiar arquivo
+├── ESTRUTURA_ARQUIVOS.md            ← este arquivo
+├── setup_database.sql               ← USAR NO SUPABASE (não copiar para src)
+├── node_modules/                    ← criado por npm install
+├── dist/                            ← criado por npm run build
+└── src/
+    ├── main.tsx                     ← renomear de src-main.tsx
+    ├── App.tsx                      ← renomear de src-App.tsx
+    ├── index.css                    ← renomear de src-index.css
+    ├── supabase.ts                  ← renomear de src-supabase.ts
+    ├── vite-env.d.ts                ← criar (arquivo vazio ou com tipos)
+    ├── components/
+    │   ├── Button.tsx               ← renomear de src-components-Button.tsx
+    │   ├── Card.tsx                 ← renomear de src-components-Card.tsx
+    │   ├── Input.tsx                ← renomear de src-components-Input.tsx
+    │   ├── Modal.tsx                ← renomear de src-components-Modal.tsx
+    │   └── index.ts                 ← renomear de src-components-index.ts
+    ├── pages/
+    │   ├── Login.tsx                ← renomear de src-pages-Login.tsx
+    │   └── Dashboard.tsx             ← renomear de src-pages-Dashboard.tsx
+    ├── store/
+    │   └── auth.ts                  ← renomear de src-store-auth.ts
+    ├── hooks/
+    │   └── (criará conforme necessário)
+    ├── utils/
+    │   └── (criará conforme necessário)
+    └── types/
+        └── (criará conforme necessário)
 ```
 
 ---
 
-## ð Passo a Passo - Copiar Arquivos
+## 🔄 Passo a Passo - Copiar Arquivos
 
 ### 1. Criar pasta raiz
 ```bash
@@ -63,7 +63,7 @@ mkdir -p src/components src/pages src/store src/hooks src/utils src/types
 mkdir -p public
 ```
 
-### 3. Copiar arquivos de configuraÃ§Ã£o (raiz)
+### 3. Copiar arquivos de configuração (raiz)
 ```bash
 # Copie estes arquivos para a raiz:
 - package.json
@@ -78,34 +78,34 @@ mkdir -p public
 
 ### 4. Criar .env.local
 Copie `.env.example` e renomeie para `.env.local`
-(Ele jÃ¡ contÃ©m as credenciais corretas)
+(Ele já contém as credenciais corretas)
 
-### 5. Copiar arquivos src/ (com renomeaÃ§Ã£o)
+### 5. Copiar arquivos src/ (com renomeação)
 ```bash
-# src-main.tsx â src/main.tsx
-# src-App.tsx â src/App.tsx
-# src-index.css â src/index.css
-# src-supabase.ts â src/supabase.ts
+# src-main.tsx → src/main.tsx
+# src-App.tsx → src/App.tsx
+# src-index.css → src/index.css
+# src-supabase.ts → src/supabase.ts
 ```
 
 ### 6. Copiar componentes
 ```bash
-# src-components-Button.tsx â src/components/Button.tsx
-# src-components-Card.tsx â src/components/Card.tsx
-# src-components-Input.tsx â src/components/Input.tsx
-# src-components-Modal.tsx â src/components/Modal.tsx
-# src-components-index.ts â src/components/index.ts
+# src-components-Button.tsx → src/components/Button.tsx
+# src-components-Card.tsx → src/components/Card.tsx
+# src-components-Input.tsx → src/components/Input.tsx
+# src-components-Modal.tsx → src/components/Modal.tsx
+# src-components-index.ts → src/components/index.ts
 ```
 
-### 7. Copiar pÃ¡ginas
+### 7. Copiar páginas
 ```bash
-# src-pages-Login.tsx â src/pages/Login.tsx
-# src-pages-Dashboard.tsx â src/pages/Dashboard.tsx
+# src-pages-Login.tsx → src/pages/Login.tsx
+# src-pages-Dashboard.tsx → src/pages/Dashboard.tsx
 ```
 
 ### 8. Copiar store
 ```bash
-# src-store-auth.ts â src/store/auth.ts
+# src-store-auth.ts → src/store/auth.ts
 ```
 
 ### 9. Criar arquivos vazios/boilerplate
@@ -172,36 +172,36 @@ coverage/
 
 ---
 
-## ð¦ Setup Database SQL
+## 📦 Setup Database SQL
 
-**â ï¸ IMPORTANTE:** `setup_database.sql` **NÃO** vai na pasta src!
+**⚠️ IMPORTANTE:** `setup_database.sql` **NÃO** vai na pasta src!
 
 Este arquivo deve ser:
-1. Mantido em um local seguro (versÃ£o controle, etc)
+1. Mantido em um local seguro (versão controle, etc)
 2. Executado **APENAS** no SQL Editor do Supabase
-3. NÃ£o serÃ¡ usado pelo cÃ³digo React diretamente
+3. Não será usado pelo código React diretamente
 
 ---
 
-## ð Arquivos Relacionados no Projeto
+## 🔗 Arquivos Relacionados no Projeto
 
-| Arquivo | PropÃ³sito | Quando usar |
+| Arquivo | Propósito | Quando usar |
 |---------|-----------|------------|
 | setup_database.sql | Criar tabelas no Supabase | 1 vez, no inicio |
-| .env.local | ConfiguraÃ§Ã£o local | Sempre (nÃ£o commitar) |
-| package.json | DependÃªncias npm | InstalaÃ§Ã£o inicial |
-| vite.config.ts | ConfiguraÃ§Ã£o build | Desenvolvimento |
-| tailwind.config.js | Estilos Tailwind | CustomizaÃ§Ã£o CSS |
-| tsconfig.json | ConfiguraÃ§Ã£o TypeScript | CompilaÃ§Ã£o |
+| .env.local | Configuração local | Sempre (não commitar) |
+| package.json | Dependências npm | Instalação inicial |
+| vite.config.ts | Configuração build | Desenvolvimento |
+| tailwind.config.js | Estilos Tailwind | Customização CSS |
+| tsconfig.json | Configuração TypeScript | Compilação |
 | index.html | Template HTML | Ponto entrada |
-| src/main.tsx | Entry point React | InicializaÃ§Ã£o |
+| src/main.tsx | Entry point React | Inicialização |
 | src/App.tsx | Rotas e layout | Estrutura app |
 
 ---
 
-## â VerificaÃ§Ã£o Final
+## ✅ Verificação Final
 
-ApÃ³s copiar todos os arquivos:
+Após copiar todos os arquivos:
 
 1. **Verifique estrutura:**
    ```bash
@@ -209,7 +209,7 @@ ApÃ³s copiar todos os arquivos:
    # Deve mostrar: components/, pages/, store/, App.tsx, main.tsx, etc
    ```
 
-2. **Instale dependÃªncias:**
+2. **Instale dependências:**
    ```bash
    npm install
    ```
@@ -234,53 +234,53 @@ ApÃ³s copiar todos os arquivos:
 
 ---
 
-## ð Estrutura Completa (ApÃ³s Setup)
+## 🚀 Estrutura Completa (Após Setup)
 
 ```
 despachante-cac-prof/
-âââ .git/                           (se usar git)
-âââ .gitignore
-âââ .env.local                      (â ï¸ NÃO commitar)
-âââ node_modules/
-âââ dist/                           (apÃ³s npm run build)
-âââ src/
-â   âââ components/
-â   â   âââ Button.tsx
-â   â   âââ Card.tsx
-â   â   âââ Input.tsx
-â   â   âââ Modal.tsx
-â   â   âââ index.ts
-â   âââ pages/
-â   â   âââ Login.tsx
-â   â   âââ Dashboard.tsx
-â   âââ store/
-â   â   âââ auth.ts
-â   âââ hooks/
-â   âââ utils/
-â   âââ types/
-â   âââ App.tsx
-â   âââ main.tsx
-â   âââ index.css
-â   âââ supabase.ts
-â   âââ vite-env.d.ts
-âââ public/
-âââ index.html
-âââ package.json
-âââ package-lock.json
-âââ vite.config.ts
-âââ tsconfig.json
-âââ tsconfig.node.json
-âââ tailwind.config.js
-âââ postcss.config.js
-âââ GUIA_IMPLEMENTACAO.md
-âââ ESTRUTURA_ARQUIVOS.md
-âââ README.md
-âââ setup_database.sql              (manter seguro, NÃO em src/)
+├── .git/                           (se usar git)
+├── .gitignore
+├── .env.local                      (⚠️ NÃO commitar)
+├── node_modules/
+├── dist/                           (após npm run build)
+├── src/
+│   ├── components/
+│   │   ├── Button.tsx
+│   │   ├── Card.tsx
+│   │   ├── Input.tsx
+│   │   ├── Modal.tsx
+│   │   └── index.ts
+│   ├── pages/
+│   │   ├── Login.tsx
+│   │   └── Dashboard.tsx
+│   ├── store/
+│   │   └── auth.ts
+│   ├── hooks/
+│   ├── utils/
+│   ├── types/
+│   ├── App.tsx
+│   ├── main.tsx
+│   ├── index.css
+│   ├── supabase.ts
+│   └── vite-env.d.ts
+├── public/
+├── index.html
+├── package.json
+├── package-lock.json
+├── vite.config.ts
+├── tsconfig.json
+├── tsconfig.node.json
+├── tailwind.config.js
+├── postcss.config.js
+├── GUIA_IMPLEMENTACAO.md
+├── ESTRUTURA_ARQUIVOS.md
+├── README.md
+└── setup_database.sql              (manter seguro, NÃO em src/)
 ```
 
 ---
 
-## ð Comando RÃ¡pido (Copiar/Colar)
+## 📋 Comando Rápido (Copiar/Colar)
 
 Se quiser copiar tudo de uma vez (assumindo Linux/Mac):
 
@@ -318,19 +318,19 @@ npm run dev
 
 ---
 
-## ð¯ PrÃ³ximo Passo
+## 🎯 Próximo Passo
 
 Depois de copiar tudo, execute:
 ```bash
 npm run dev
 ```
 
-VocÃª verÃ¡:
+Você verá:
 ```
 VITE v5.x.x  ready in xxx ms
 
-â  Local:   http://localhost:3000/
-â  press h to show help
+➜  Local:   http://localhost:3000/
+➜  press h to show help
 ```
 
-Abra http://localhost:3000 no navegador e veja o login aparecer! â
+Abra http://localhost:3000 no navegador e veja o login aparecer! ✅
