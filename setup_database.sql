@@ -1,7 +1,7 @@
 -- ============================================================================
 -- DESPACHANTE CAC PROF - Database Setup
 -- ============================================================================
--- CriaÃ§Ã£o de todas as tabelas para o sistema de gestÃ£o de CAC
+-- Criação de todas as tabelas para o sistema de gestão de CAC
 
 -- ============================================================================
 -- 1. TABELA: USERS (Despachantes)
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS weapons (
   caliber TEXT,
   model TEXT,
   manufacturer TEXT,
-  category TEXT, -- Atirador, Colecionador, CaÃ§ador
+  category TEXT, -- Atirador, Colecionador, Caçador
   registration_number TEXT,
   registration_date TIMESTAMP WITH TIME ZONE,
   expiration_date TIMESTAMP WITH TIME ZONE,
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS documents (
   file_size INTEGER,
   storage_path TEXT NOT NULL,
   description TEXT,
-  tags TEXT[], -- array de tags para categorizaÃ§Ã£o
+  tags TEXT[], -- array de tags para categorização
   version INTEGER DEFAULT 1,
   uploaded_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS checklists (
 );
 
 -- ============================================================================
--- 7. TABELA: CHECKLIST INSTANCES (InstÃ¢ncias de Checklists Preenchidas)
+-- 7. TABELA: CHECKLIST INSTANCES (Instâncias de Checklists Preenchidas)
 -- ============================================================================
 CREATE TABLE IF NOT EXISTS checklist_instances (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -169,7 +169,7 @@ CREATE TABLE IF NOT EXISTS knowledge_base (
 );
 
 -- ============================================================================
--- 10. TABELA: COMMUNICATIONS (HistÃ³rico de ComunicaÃ§Ãµes)
+-- 10. TABELA: COMMUNICATIONS (Histórico de Comunicações)
 -- ============================================================================
 CREATE TABLE IF NOT EXISTS communications (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -199,7 +199,7 @@ CREATE INDEX IF NOT EXISTS idx_knowledge_base_tags ON knowledge_base USING gin(t
 CREATE INDEX IF NOT EXISTS idx_communications_client ON communications(client_id);
 
 -- ============================================================================
--- 12. ROW LEVEL SECURITY (RLS) - SeguranÃ§a
+-- 12. ROW LEVEL SECURITY (RLS) - Segurança
 -- ============================================================================
 
 -- Enable RLS on all tables
@@ -278,10 +278,10 @@ CREATE POLICY "Anyone can view published knowledge" ON knowledge_base
   FOR SELECT USING (published = TRUE);
 
 -- ============================================================================
--- 13. FUNC æES ÃTEIS
+-- 13. FUNÇÕES ÚTEIS
 -- ============================================================================
 
--- FunÃ§Ã£o para atualizar updated_at automaticamente
+-- Função para atualizar updated_at automaticamente
 CREATE OR REPLACE FUNCTION update_updated_at_column()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -317,35 +317,35 @@ INSERT INTO knowledge_base (title, content, category, tags, published)
 VALUES
   (
     'Como obter CAC em 5 passos',
-    'Passo 1: Preparar documentaÃ§Ã£o\nPasso 2: Enviar ao ExÃ©rcito\nPasso 3: AnÃ¡lise\nPasso 4: Entrevista\nPasso 5: AprovaÃ§Ã£o',
+    'Passo 1: Preparar documentação\nPasso 2: Enviar ao Exército\nPasso 3: Análise\nPasso 4: Entrevista\nPasso 5: Aprovação',
     'Guia',
     ARRAY['CAC', 'Processo', 'Iniciante'],
     TRUE
   ),
   (
-    'DiferenÃ§a entre POSSE e PORTE',
-    'POSSE: Arma em casa, segura\nPORTE: Arma na rua com guia de trÃ¡fego',
+    'Diferença entre POSSE e PORTE',
+    'POSSE: Arma em casa, segura\nPORTE: Arma na rua com guia de tráfego',
     'Guia',
     ARRAY['Legislacao', 'Importante'],
     TRUE
   ),
   (
-    'Lei nÂº 10.826/2003 - Estatuto do Desarmamento',
-    'LegislaÃ§Ã£o principal que regulamenta armas de fogo no Brasil',
+    'Lei nº 10.826/2003 - Estatuto do Desarmamento',
+    'Legislação principal que regulamenta armas de fogo no Brasil',
     'Legislacao',
     ARRAY['Lei', 'Oficial'],
     TRUE
   ),
   (
-    'Decreto nÂº 11.366/2023 - AtualizaÃ§Ãµes',
+    'Decreto nº 11.366/2023 - Atualizações',
     'Decreto recente que alterou regras de transporte de armas',
     'Legislacao',
     ARRAY['Decreto', 'Atualizado', '2023'],
     TRUE
   ),
   (
-    'O que levar em uma fiscalizaÃ§Ã£o',
-    'Checklist com tudo que um CAC deve levar em uma fiscalizaÃ§Ã£o do ExÃ©rcito',
+    'O que levar em uma fiscalização',
+    'Checklist com tudo que um CAC deve levar em uma fiscalização do Exército',
     'Checklist',
     ARRAY['Fiscalizacao', 'Importante'],
     TRUE
@@ -355,5 +355,5 @@ VALUES
 -- FIM DO SETUP
 -- ============================================================================
 -- Todas as tabelas foram criadas com sucesso!
--- As polÃ­ticas de RLS estÃ£o ativas para seguranÃ§a
+-- As políticas de RLS estão ativas para segurança
 -- Base de conhecimento inicializada
