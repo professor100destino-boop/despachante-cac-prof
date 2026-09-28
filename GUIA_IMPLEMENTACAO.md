@@ -1,21 +1,21 @@
-# GUIA DE IMPLEMENTAÃÃO - DESPACHANTE CAC PROF
+# GUIA DE IMPLEMENTAÇÃO - DESPACHANTE CAC PROF
 
-## ð Resumo
+## 📋 Resumo
 Este guia mostra passo a passo como implementar o **DESPACHANTE CAC PROF** - um PWA especializado em despachantia para CAC, Porte e Posse de Arma.
 
-VocÃª jÃ¡ tem:
-- â Projeto Supabase criado (`prova-facil`)
-- â Credenciais de acesso
-- â Banco de dados estruturado (`setup_database.sql`)
-- â Projeto React scaffolding completo
-- â Componentes base e autenticaÃ§Ã£o
+Você já tem:
+- ✅ Projeto Supabase criado (`prova-facil`)
+- ✅ Credenciais de acesso
+- ✅ Banco de dados estruturado (`setup_database.sql`)
+- ✅ Projeto React scaffolding completo
+- ✅ Componentes base e autenticação
 
 ---
 
-## ð§ PASSO 1: Executar o Schema do Banco de Dados
+## 🔧 PASSO 1: Executar o Schema do Banco de Dados
 
 ### O que fazer:
-O arquivo `setup_database.sql` contÃ©m todas as tabelas, Ã­ndices e polÃ­ticas de seguranÃ§a (RLS).
+O arquivo `setup_database.sql` contém todas as tabelas, índices e políticas de segurança (RLS).
 
 ### Como executar:
 
@@ -26,35 +26,35 @@ O arquivo `setup_database.sql` contÃ©m todas as tabelas, Ã­ndices e polÃ­t
 
 2. **Clique em "New Query"** (canto superior direito)
 
-3. **Cole todo o conteÃºdo do arquivo `setup_database.sql`:**
-   - O arquivo estÃ¡ no scratchpad
-   - Copie TODO o conteÃºdo (linhas 1-360)
+3. **Cole todo o conteúdo do arquivo `setup_database.sql`:**
+   - O arquivo está no scratchpad
+   - Copie TODO o conteúdo (linhas 1-360)
 
 4. **Clique em "Run"** ou pressione `Ctrl+Enter`
 
-5. **Aguarde a execuÃ§Ã£o:**
-   - VocÃª verÃ¡ mensagens de sucesso para cada tabela criada
-   - Leia a mensagem final de confirmaÃ§Ã£o
+5. **Aguarde a execução:**
+   - Você verá mensagens de sucesso para cada tabela criada
+   - Leia a mensagem final de confirmação
 
 ### Tabelas criadas:
 - `users` - Despachantes
 - `clients` - Clientes dos despachantes
-- `processes` - Processos (CAC, Porte, Posse, Compra, RenovaÃ§Ã£o)
+- `processes` - Processos (CAC, Porte, Posse, Compra, Renovação)
 - `weapons` - Armas registradas
 - `documents` - Arquivos e documentos
 - `checklists` - Templates de checklists
-- `checklist_instances` - InstÃ¢ncias preenchidas
+- `checklist_instances` - Instâncias preenchidas
 - `deadlines` - Prazos e lembretes
 - `knowledge_base` - Base de conhecimento
-- `communications` - HistÃ³rico de comunicaÃ§Ãµes
+- `communications` - Histórico de comunicações
 
-**â VocÃª saberÃ¡ que funcionou quando nÃ£o houver erros vermelhos.**
+**✅ Você saberá que funcionou quando não houver erros vermelhos.**
 
 ---
 
-## ð» PASSO 2: Configurar o Projeto React Localmente
+## 💻 PASSO 2: Configurar o Projeto React Localmente
 
-### PrÃ©-requisitos:
+### Pré-requisitos:
 - Node.js 18+ instalado
 - npm ou yarn
 - Terminal/Prompt de comando
@@ -80,10 +80,10 @@ Todos os arquivos fornecidos devem ser copiados para as pastas corretas:
 - `package.json`
 - `vite.config.ts`
 - `tsconfig.json`
-- `tsconfig.node.json` (crie uma cÃ³pia simples de tsconfig.json)
+- `tsconfig.node.json` (crie uma cópia simples de tsconfig.json)
 - `tailwind.config.js`
 - `postcss.config.js`
-- `.env.example` â renomear para `.env.local`
+- `.env.example` → renomear para `.env.local`
 - `index.html`
 
 **Em src/:**
@@ -106,12 +106,12 @@ Todos os arquivos fornecidos devem ser copiados para as pastas corretas:
 - `Login.tsx` (renomear de `src-pages-Login.tsx`)
 - `Dashboard.tsx` (renomear de `src-pages-Dashboard.tsx`)
 
-#### 4. **Instalar dependÃªncias:**
+#### 4. **Instalar dependências:**
 ```bash
 npm install
 ```
 
-Isso instalarÃ¡:
+Isso instalará:
 - React 18
 - React Router
 - Supabase Client
@@ -121,9 +121,9 @@ Isso instalarÃ¡:
 - Vite (build tool)
 - E mais...
 
-**Aguarde atÃ© aparecer "added X packages"**
+**Aguarde até aparecer "added X packages"**
 
-#### 5. **Configurar variÃ¡veis de ambiente:**
+#### 5. **Configurar variáveis de ambiente:**
 
 Abra `.env.local` e verifique se tem:
 ```env
@@ -134,49 +134,49 @@ VITE_APP_NAME=DESPACHANTE CAC PROF
 
 ---
 
-## ð PASSO 3: Executar o Projeto em Desenvolvimento
+## 🚀 PASSO 3: Executar o Projeto em Desenvolvimento
 
 ### Comando:
 ```bash
 npm run dev
 ```
 
-### O que acontecerÃ¡:
-1. Vite iniciarÃ¡ um servidor local em `http://localhost:3000`
-2. O navegador abrirÃ¡ automaticamente
-3. VocÃª verÃ¡ a pÃ¡gina de Login
+### O que acontecerá:
+1. Vite iniciará um servidor local em `http://localhost:3000`
+2. O navegador abrirá automaticamente
+3. Você verá a página de Login
 
 ### Se der erro:
-- **Port 3000 jÃ¡ estÃ¡ em uso?** Rode `npm run dev -- --port 3001`
+- **Port 3000 já está em uso?** Rode `npm run dev -- --port 3001`
 - **Erro de Node modules?** Delete `node_modules` e rode `npm install` novamente
 - **Erro de tipos TypeScript?** Rode `npm run build` para ver detalhes
 
 ---
 
-## ð§ª PASSO 4: Testar a AutenticaÃ§Ã£o
+## 🧪 PASSO 4: Testar a Autenticação
 
-### Na pÃ¡gina de Login:
+### Na página de Login:
 
 1. **Clique em "Criar Nova Conta"**
 2. **Preencha:**
-   - Nome Completo: ex. "JoÃ£o Silva"
+   - Nome Completo: ex. "João Silva"
    - Nome da Empresa: ex. "Despachante CAC Silva"
    - E-mail: seu@email.com
-   - Senha: qualquer senha (mÃ­n. 6 caracteres)
+   - Senha: qualquer senha (mín. 6 caracteres)
 3. **Clique em "Criar Conta"**
 
 ### Esperado:
-â VocÃª serÃ¡ redirecionado para o Dashboard  
-â VerÃ¡ seu nome e empresa na pÃ¡gina  
-â Dashboard mostrarÃ¡ estatÃ­sticas vazias (0 clientes, 0 processos)  
+✅ Você será redirecionado para o Dashboard  
+✅ Verá seu nome e empresa na página  
+✅ Dashboard mostrará estatísticas vazias (0 clientes, 0 processos)  
 
 ### Se der erro:
 - Verifique se o setup_database.sql foi executado com sucesso
-- Verifique se as credenciais do Supabase estÃ£o corretas em `.env.local`
+- Verifique se as credenciais do Supabase estão corretas em `.env.local`
 
 ---
 
-## ð± PASSO 5: Construir para ProduÃ§Ã£o
+## 📱 PASSO 5: Construir para Produção
 
 ### Comando:
 ```bash
@@ -184,8 +184,8 @@ npm run build
 ```
 
 ### Resultado:
-- Pasta `dist/` serÃ¡ criada
-- ContÃ©m todos os arquivos minificados e otimizados
+- Pasta `dist/` será criada
+- Contém todos os arquivos minificados e otimizados
 - Pronto para fazer deploy em qualquer servidor
 
 ### Deploy (exemplos):
@@ -211,31 +211,31 @@ supabase projects list
 
 ---
 
-## ð SeguranÃ§a & Dados
+## 🔐 Segurança & Dados
 
 ### Row Level Security (RLS) ativada:
-- Cada despachante sÃ³ vÃª seus prÃ³prios clientes
-- Cada despachante sÃ³ vÃª seus prÃ³prios processos
-- Documentos sÃ£o isolados por usuÃ¡rio
-- Tudo automÃ¡tico via Supabase
+- Cada despachante só vê seus próprios clientes
+- Cada despachante só vê seus próprios processos
+- Documentos são isolados por usuário
+- Tudo automático via Supabase
 
 ### Criptografia:
 - Senhas: hash com bcrypt (Supabase)
-- ComunicaÃ§Ã£o: HTTPS obrigatÃ³rio
+- Comunicação: HTTPS obrigatório
 - Dados em repouso: criptografados no Supabase
 
 ### Backup:
-- Supabase faz backup automÃ¡tico diariamente
-- RetenÃ§Ã£o de 30 dias de backups
+- Supabase faz backup automático diariamente
+- Retenção de 30 dias de backups
 
 ---
 
-## ð¨ PrÃ³ximos Passos (MVP)
+## 🎨 Próximos Passos (MVP)
 
-Com o projeto rodando, vocÃª pode:
+Com o projeto rodando, você pode:
 
-1. **Adicionar pÃ¡gina de Clientes:**
-   - FormulÃ¡rio de cadastro
+1. **Adicionar página de Clientes:**
+   - Formulário de cadastro
    - CRUD completo
    - Upload de documentos
 
@@ -245,64 +245,64 @@ Com o projeto rodando, vocÃª pode:
    - Calcular progresso
 
 3. **Base de Conhecimento:**
-   - Artigos sobre legislaÃ§Ã£o
+   - Artigos sobre legislação
    - Busca full-text
-   - CategorizaÃ§Ã£o
+   - Categorização
 
 4. **Gerenciador de Prazos:**
-   - CalendÃ¡rio visual
-   - NotificaÃ§Ãµes automÃ¡ticas
-   - IntegraÃ§Ã£o com Google Calendar
+   - Calendário visual
+   - Notificações automáticas
+   - Integração com Google Calendar
 
 5. **Simulador de Custos:**
    - Estimativa por processo
-   - VariaÃ§Ãµes por regiÃ£o
-   - GeraÃ§Ã£o de PDF
+   - Variações por região
+   - Geração de PDF
 
 ---
 
-## ð Troubleshooting
+## 📞 Troubleshooting
 
 ### Problema: "Cannot find module"
-**SoluÃ§Ã£o:** Verifique se os caminhos de importaÃ§Ã£o estÃ£o corretos (sem ou com `.tsx`)
+**Solução:** Verifique se os caminhos de importação estão corretos (sem ou com `.tsx`)
 
 ### Problema: "Supabase connection refused"
-**SoluÃ§Ã£o:** Verifique as credenciais em `.env.local`
+**Solução:** Verifique as credenciais em `.env.local`
 
 ### Problema: "Port already in use"
-**SoluÃ§Ã£o:** `npm run dev -- --port 3001`
+**Solução:** `npm run dev -- --port 3001`
 
 ### Problema: "CORS error"
-**SoluÃ§Ã£o:** O Supabase deve estar com CORS configurado (geralmente automÃ¡tico)
+**Solução:** O Supabase deve estar com CORS configurado (geralmente automático)
 
 ### Problema: "Can't login"
-**SoluÃ§Ã£o:** Verifique se `setup_database.sql` foi executado e se a tabela `users` existe
+**Solução:** Verifique se `setup_database.sql` foi executado e se a tabela `users` existe
 
 ---
 
-## ð Arquitetura
+## 📊 Arquitetura
 
 ```
 DESPACHANTE CAC PROF
-âââ Frontend (React + Vite)
-â   âââ Pages: Login, Dashboard, Clients, Processes, etc.
-â   âââ Components: Button, Card, Input, Modal
-â   âââ Store: Zustand (auth, clients, processes)
-â   âââ Utils: Supabase client, types
-âââ Backend (Supabase)
-â   âââ Auth: OAuth + Email/Password
-â   âââ Database: PostgreSQL com RLS
-â   âââ Storage: Documentos e arquivos
-â   âââ Edge Functions: APIs customizadas (futuro)
-âââ PWA
-    âââ Service Worker: Offline-first
-    âââ Manifest: Installable
-    âââ Responsive: Mobile + Desktop
+├── Frontend (React + Vite)
+│   ├── Pages: Login, Dashboard, Clients, Processes, etc.
+│   ├── Components: Button, Card, Input, Modal
+│   ├── Store: Zustand (auth, clients, processes)
+│   └── Utils: Supabase client, types
+├── Backend (Supabase)
+│   ├── Auth: OAuth + Email/Password
+│   ├── Database: PostgreSQL com RLS
+│   ├── Storage: Documentos e arquivos
+│   └── Edge Functions: APIs customizadas (futuro)
+└── PWA
+    ├── Service Worker: Offline-first
+    ├── Manifest: Installable
+    └── Responsive: Mobile + Desktop
 ```
 
 ---
 
-## â Checklist de VerificaÃ§Ã£o
+## ✅ Checklist de Verificação
 
 - [ ] Projeto Supabase criado e ativo
 - [ ] setup_database.sql executado com sucesso
@@ -317,9 +317,9 @@ DESPACHANTE CAC PROF
 
 ---
 
-**Status: Pronto para Desenvolvimento! ð**
+**Status: Pronto para Desenvolvimento! 🚀**
 
-Qualquer dÃºvida, revise este guia ou consulte a documentaÃ§Ã£o oficial:
+Qualquer dúvida, revise este guia ou consulte a documentação oficial:
 - React: https://react.dev
 - Supabase: https://supabase.com/docs
 - Tailwind: https://tailwindcss.com
