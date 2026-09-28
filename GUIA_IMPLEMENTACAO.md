@@ -21,7 +21,7 @@ O arquivo `setup_database.sql` contém todas as tabelas, índices e políticas d
 
 1. **Acesse o Supabase SQL Editor:**
    ```
-   https://supabase.com/dashboard/project/elmnlvylhuzfnarjzdxy/sql
+   https://supabase.com/dashboard/project/SEU_PROJETO_ID/sql
    ```
 
 2. **Clique em "New Query"** (canto superior direito)
