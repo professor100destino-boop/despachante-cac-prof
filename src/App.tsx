@@ -42,7 +42,7 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/despachante-cac-prof">
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route
