@@ -2,138 +2,138 @@
 DESPACHANTE CAC PROF - LISTA COMPLETA DE ARQUIVOS CRIADOS
 ================================================================================
 
-TOTAL: 30+ arquivos e documentaÃ§Ã£o profissional
+TOTAL: 30+ arquivos e documentação profissional
 
 ================================================================================
-DOCUMENTAÃÃO (LEIA PRIMEIRO!)
+DOCUMENTAÇÃO (LEIA PRIMEIRO!)
 ================================================================================
 
-1. RESUMO_PROJETO.md              â â­ COMECE AQUI
-   Status completo, prÃ³ximos passos, checklist
+1. RESUMO_PROJETO.md              ← ⭐ COMECE AQUI
+   Status completo, próximos passos, checklist
 
-2. GUIA_IMPLEMENTACAO.md          â PASSO A PASSO DETALHADO
+2. GUIA_IMPLEMENTACAO.md          ← PASSO A PASSO DETALHADO
    Como executar SQL, setup React, testar tudo
 
-3. ESTRUTURA_ARQUIVOS.md          â MAPEAMENTO DE PASTAS
+3. ESTRUTURA_ARQUIVOS.md          ← MAPEAMENTO DE PASTAS
    Onde copiar cada arquivo, estrutura final
 
-4. LISTA_ARQUIVOS.txt             â Este arquivo
-   Ãndice de tudo que foi criado
+4. LISTA_ARQUIVOS.txt             ← Este arquivo
+   Índice de tudo que foi criado
 
-5. DESPACHANTE_CAC_PRO_PLANO.md   â PLANO DO PROJETO
-   VisÃ£o geral, funcionalidades, roadmap (do contrato anterior)
+5. DESPACHANTE_CAC_PRO_PLANO.md   ← PLANO DO PROJETO
+   Visão geral, funcionalidades, roadmap (do contrato anterior)
 
 ================================================================================
 BANCO DE DADOS (EXECUTE NO SUPABASE)
 ================================================================================
 
-6. setup_database.sql             â â ï¸ EXECUTE NO SUPABASE SQL EDITOR
+6. setup_database.sql             ← ⚠️ EXECUTE NO SUPABASE SQL EDITOR
    - 10 tabelas completas
-   - Ãndices para performance
+   - Índices para performance
    - Row Level Security (RLS)
-   - Triggers automÃ¡ticos
+   - Triggers automáticos
    - Base de conhecimento inicial
 
 ================================================================================
-CONFIGURAÃÃO DO PROJETO
+CONFIGURAÇÃO DO PROJETO
 ================================================================================
 
-7. package.json                    â DependÃªncias npm
+7. package.json                    ← Dependências npm
    React 18, Supabase, Tailwind, TypeScript, etc.
 
-8. vite.config.ts                 â ConfiguraÃ§Ã£o Vite
-   Build tool, PWA plugin, otimizaÃ§Ãµes
+8. vite.config.ts                 ← Configuração Vite
+   Build tool, PWA plugin, otimizações
 
-9. tsconfig.json                  â ConfiguraÃ§Ã£o TypeScript
-   CompilaÃ§Ã£o type-safe
+9. tsconfig.json                  ← Configuração TypeScript
+   Compilação type-safe
 
-10. tsconfig.node.json             â Config TS para Vite (cria novo)
+10. tsconfig.node.json             ← Config TS para Vite (cria novo)
 
-11. tailwind.config.js             â Estilos Tailwind
+11. tailwind.config.js             ← Estilos Tailwind
     Cores, tipografia, componentes
 
-12. postcss.config.js              â Post-processamento CSS
+12. postcss.config.js              ← Post-processamento CSS
     Autoprefixer, Tailwind
 
-13. .env.example                   â VariÃ¡veis de ambiente
+13. .env.example                   ← Variáveis de ambiente
     (Renomear para .env.local)
 
-14. index.html                     â Template HTML raiz
+14. index.html                     ← Template HTML raiz
     PWA manifest, viewport, meta tags
 
 ================================================================================
-CÃDIGO FONTE - COMPONENTES (src/components/)
+CÓDIGO FONTE - COMPONENTES (src/components/)
 ================================================================================
 
-15. src-components-Button.tsx      â src/components/Button.tsx
+15. src-components-Button.tsx      → src/components/Button.tsx
     Button, 4 variantes (primary, secondary, danger, success)
 
-16. src-components-Card.tsx        â src/components/Card.tsx
+16. src-components-Card.tsx        → src/components/Card.tsx
     Card, CardHeader, CardBody, CardFooter
 
-17. src-components-Input.tsx       â src/components/Input.tsx
-    Input, TextArea, Select, Checkbox com validaÃ§Ã£o
+17. src-components-Input.tsx       → src/components/Input.tsx
+    Input, TextArea, Select, Checkbox com validação
 
-18. src-components-Modal.tsx       â src/components/Modal.tsx
+18. src-components-Modal.tsx       → src/components/Modal.tsx
     Modal dialogs, Alert components
 
-19. src-components-index.ts        â src/components/index.ts
+19. src-components-index.ts        → src/components/index.ts
     Barrel exports para imports simples
 
 ================================================================================
-CÃDIGO FONTE - PÃGINAS (src/pages/)
+CÓDIGO FONTE - PÁGINAS (src/pages/)
 ================================================================================
 
-20. src-pages-Login.tsx            â src/pages/Login.tsx
-    PÃ¡gina de Login/Sign-up completa
-    - AutenticaÃ§Ã£o com Supabase
-    - ValidaÃ§Ã£o de formulÃ¡rio
+20. src-pages-Login.tsx            → src/pages/Login.tsx
+    Página de Login/Sign-up completa
+    - Autenticação com Supabase
+    - Validação de formulário
     - Mensagens de erro
 
-21. src-pages-Dashboard.tsx        â src/pages/Dashboard.tsx
+21. src-pages-Dashboard.tsx        → src/pages/Dashboard.tsx
     Dashboard principal com:
-    - EstatÃ­sticas (clientes, processos)
+    - Estatísticas (clientes, processos)
     - Lista de clientes recentes
     - Lista de processos recentes
     - Pronto para expandir
 
 ================================================================================
-CÃDIGO FONTE - STORE (src/store/)
+CÓDIGO FONTE - STORE (src/store/)
 ================================================================================
 
-22. src-store-auth.ts             â src/store/auth.ts
-    Zustand store para autenticaÃ§Ã£o
+22. src-store-auth.ts             → src/store/auth.ts
+    Zustand store para autenticação
     - Sign up, Sign in, Sign out
     - Reset password
     - Update profile
     - Auth state management
 
 ================================================================================
-CÃDIGO FONTE - CORE (src/)
+CÓDIGO FONTE - CORE (src/)
 ================================================================================
 
-23. src-supabase.ts               â src/supabase.ts
+23. src-supabase.ts               → src/supabase.ts
     Cliente Supabase + tipos TypeScript
     - User, Client, Process, Weapon
     - Document, Deadline, Checklist
     - KnowledgeBase, Communication
 
-24. src-App.tsx                   â src/App.tsx
-    Componente raiz da aplicaÃ§Ã£o
+24. src-App.tsx                   → src/App.tsx
+    Componente raiz da aplicação
     - React Router setup
     - Protected routes
     - Loading state
 
-25. src-main.tsx                  â src/main.tsx
+25. src-main.tsx                  → src/main.tsx
     Entry point React
     - Render DOM
     - Service Worker
 
-26. src-index.css                 â src/index.css
+26. src-index.css                 → src/index.css
     Tailwind + estilos globais
     - Cores base
     - Componentes customizados
-    - AnimaÃ§Ãµes
+    - Animações
 
 ================================================================================
 ARQUIVOS A CRIAR (boilerplate)
@@ -148,22 +148,22 @@ PASTAS A CRIAR (vazias, para crescer)
 ================================================================================
 
 30. src/hooks/                    Para custom React hooks
-31. src/utils/                    Para funÃ§Ãµes utilitÃ¡rias
+31. src/utils/                    Para funções utilitárias
 32. src/types/                    Para tipos TypeScript adicionais
-33. public/                       Para assets estÃ¡ticos
+33. public/                       Para assets estáticos
 
 ================================================================================
 RESUMO POR CATEGORIA
 ================================================================================
 
-ð DOCUMENTAÃÃO:    5 arquivos (RESUMO, GUIA, ESTRUTURA, LISTA, PLANO)
-ð¾ BANCO:          1 arquivo (setup_database.sql)
-âï¸  CONFIGURAÃÃO:  7 arquivos (package.json, vite, ts, tailwind, etc)
-ð§© COMPONENTES:    5 arquivos (Button, Card, Input, Modal, index)
-ð PÃGINAS:        2 arquivos (Login, Dashboard)
-ðï¸  STORE:         1 arquivo (auth.ts)
-ð¯ CORE:           4 arquivos (supabase, App, main, index.css)
-ð CRIAR:          3 arquivos (vite-env.d.ts, .gitignore, tsconfig.node)
+📚 DOCUMENTAÇÃO:    5 arquivos (RESUMO, GUIA, ESTRUTURA, LISTA, PLANO)
+💾 BANCO:          1 arquivo (setup_database.sql)
+⚙️  CONFIGURAÇÃO:  7 arquivos (package.json, vite, ts, tailwind, etc)
+🧩 COMPONENTES:    5 arquivos (Button, Card, Input, Modal, index)
+📄 PÁGINAS:        2 arquivos (Login, Dashboard)
+🗂️  STORE:         1 arquivo (auth.ts)
+🎯 CORE:           4 arquivos (supabase, App, main, index.css)
+📁 CRIAR:          3 arquivos (vite-env.d.ts, .gitignore, tsconfig.node)
 
 TOTAL CRIADO:      28 arquivos
 TOTAL A CRIAR:     5 arquivos (boilerplate)
@@ -173,7 +173,7 @@ TOTAL FINAL:       33 arquivos completos
 CRONOGRAMA RECOMENDADO
 ================================================================================
 
-1. LER DOCUMENTAÃÃO          (15 min)
+1. LER DOCUMENTAÇÃO          (15 min)
    - RESUMO_PROJETO.md
    - GUIA_IMPLEMENTACAO.md
 
@@ -188,8 +188,8 @@ CRONOGRAMA RECOMENDADO
    - Testar login
 
 4. DESENVOLVIMENTO MVP      (2-3 semanas)
-   - PÃ¡ginas de clientes
-   - GestÃ£o de processos
+   - Páginas de clientes
+   - Gestão de processos
    - Gerador de checklists
    - Base de conhecimento
    - Prazos e lembretes
@@ -198,24 +198,24 @@ CRONOGRAMA RECOMENDADO
 ARQUIVOS IMPORTANTES
 ================================================================================
 
-â NÃO COMMITAR:
+❌ NÃO COMMITAR:
    - .env.local (tem credenciais)
    - node_modules/ (npm install re-cria)
    - dist/ (npm run build re-cria)
 
-â DEVE COMMITAR:
-   - setup_database.sql (versÃ£o controle)
+✅ DEVE COMMITAR:
+   - setup_database.sql (versão controle)
    - .env.example (template sem credenciais)
    - Todos os .tsx, .ts, .json
-   - DocumentaÃ§Ã£o
+   - Documentação
 
 ================================================================================
-COMANDOS RÃPIDOS
+COMANDOS RÁPIDOS
 ================================================================================
 
-npm install                # Instalar dependÃªncias
+npm install                # Instalar dependências
 npm run dev               # Rodar em desenvolvimento (localhost:3000)
-npm run build             # Build para produÃ§Ã£o (pasta dist/)
+npm run build             # Build para produção (pasta dist/)
 npm run preview           # Preview da build
 npm run type-check        # Verificar tipos TypeScript
 npm run lint              # Linting (quando adicionado)
@@ -224,25 +224,25 @@ npm run lint              # Linting (quando adicionado)
 CREDENCIAIS SUPABASE
 ================================================================================
 
-Project ID:  elmnlvylhuzfnarjzdxy
+Project ID:  SEU_PROJETO_ID
 Region:      sa-east-1
 Anon Key:    SUA_CHAVE_ANON_AQUI (nao compartilhar publicamente)
-URL:         https://elmnlvylhuzfnarjzdxy.supabase.co
+URL:         https://SEU_PROJETO.supabase.co
 
 ================================================================================
-PRÃXIMO PASSO
+PRÓXIMO PASSO
 ================================================================================
 
-1. Leia: RESUMO_PROJETO.md (este arquivo resumirÃ¡ tudo)
+1. Leia: RESUMO_PROJETO.md (este arquivo resumirá tudo)
 2. Siga: GUIA_IMPLEMENTACAO.md (passo a passo)
 3. Configure: ESTRUTURA_ARQUIVOS.md (organize as pastas)
 4. Execute: npm run dev
-5. Desenvolva: Implemente as pÃ¡ginas faltantes
+5. Desenvolva: Implemente as páginas faltantes
 
 ================================================================================
 
-VersÃ£o: 0.1.0 (MVP Scaffolding Completo)
+Versão: 0.1.0 (MVP Scaffolding Completo)
 Criado: 26 de Setembro de 2026
-Status: ð¢ PRONTO PARA DESENVOLVIMENTO
+Status: 🟢 PRONTO PARA DESENVOLVIMENTO
 
 ================================================================================
