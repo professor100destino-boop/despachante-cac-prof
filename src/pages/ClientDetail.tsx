@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { ArrowLeft, Plus, FileText, User as UserIcon } from 'lucide-react'
-import { supabase, type Client, type Process } from '../supabase'
-import { Button, Card, CardHeader, CardBody, Modal, Select, TextArea } from '../components'
+import { ArrowLeft, Plus, FileText, User as UserIcon, Crosshair } from 'lucide-react'
+import { supabase, type Client, type Process, type Weapon } from '../supabase'
+import { Button, Card, CardHeader, CardBody, Modal, Select, TextArea, Input } from '../components'
 
 const PROCESS_TYPES = [
   { value: 'CAC', label: 'CAC' },
@@ -24,6 +24,7 @@ export const ClientDetail = () => {
 
   const [client, setClient] = useState<Client | null>(null)
   const [processes, setProcesses] = useState<Process[]>([])
+  const [weapons, setWeapons] = useState<Weapon[]>([])
   const [loading, setLoading] = useState(true)
   const [notFound, setNotFound] = useState(false)
 
@@ -35,6 +36,18 @@ export const ClientDetail = () => {
     category: '',
     priority: 'normal',
     description: '',
+  })
+
+  const [weaponModalOpen, setWeaponModalOpen] = useState(false)
+  const [savingWeapon, setSavingWeapon] = useState(false)
+  const [weaponError, setWeaponError] = useState<string | null>(null)
+  const [weaponForm, setWeaponForm] = useState({
+    serial_number: '',
+    caliber: '',
+    model: '',
+    manufacturer: '',
+    category: '',
+    registration_number: '',
   })
 
   useEffect(() => {
@@ -63,6 +76,14 @@ export const ClientDetail = () => {
         .order('created_at', { ascending: false })
 
       setProcesses((processesData as Process[]) || [])
+
+      const { data: weaponsData } = await supabase
+        .from('weapons')
+        .select('*')
+        .eq('client_id', clientId)
+        .order('created_at', { ascending: false })
+
+      setWeapons((weaponsData as Weapon[]) || [])
     } catch (err) {
       console.error('Erro ao buscar cliente:', err)
       setNotFound(true)
@@ -96,6 +117,54 @@ export const ClientDetail = () => {
       setError(err instanceof Error ? err.message : 'Erro ao criar processo.')
     } finally {
       setSaving(false)
+    }
+  }
+
+  const handleCreateWeapon = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!id) return
+    setWeaponError(null)
+
+    if (!weaponForm.serial_number.trim()) {
+      setWeaponError('O número de série é obrigatório.')
+      return
+    }
+
+    setSavingWeapon(true)
+    try {
+      const { error: insertError } = await supabase.from('weapons').insert([
+        {
+          client_id: id,
+          serial_number: weaponForm.serial_number.trim(),
+          caliber: weaponForm.caliber.trim() || null,
+          model: weaponForm.model.trim() || null,
+          manufacturer: weaponForm.manufacturer.trim() || null,
+          category: weaponForm.category || null,
+          registration_number: weaponForm.registration_number.trim() || null,
+        },
+      ])
+
+      if (insertError) {
+        if (insertError.code === '23505') {
+          throw new Error('Já existe uma arma cadastrada com esse número de série para este cliente.')
+        }
+        throw insertError
+      }
+
+      setWeaponModalOpen(false)
+      setWeaponForm({
+        serial_number: '',
+        caliber: '',
+        model: '',
+        manufacturer: '',
+        category: '',
+        registration_number: '',
+      })
+      fetchData(id)
+    } catch (err) {
+      setWeaponError(err instanceof Error ? err.message : 'Erro ao cadastrar arma.')
+    } finally {
+      setSavingWeapon(false)
     }
   }
 
@@ -220,6 +289,50 @@ export const ClientDetail = () => {
             )}
           </CardBody>
         </Card>
+
+        <Card>
+          <CardHeader
+            title="Armas"
+            action={
+              <Button variant="primary" size="sm" icon={<Plus size={16} />} onClick={() => setWeaponModalOpen(true)}>
+                Nova Arma
+              </Button>
+            }
+          />
+          <CardBody>
+            {weapons.length === 0 ? (
+              <div className="text-center py-8">
+                <Crosshair className="mx-auto text-gray-400 mb-3" size={32} />
+                <p className="text-gray-600">Nenhuma arma cadastrada para este cliente ainda.</p>
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {weapons.map((weapon) => (
+                  <div
+                    key={weapon.id}
+                    className="flex items-center justify-between p-4 bg-gray-50 rounded-lg"
+                  >
+                    <div>
+                      <p className="font-medium text-gray-900">
+                        {weapon.model || 'Modelo não informado'}
+                        {weapon.manufacturer ? ` - ${weapon.manufacturer}` : ''}
+                      </p>
+                      <p className="text-sm text-gray-600 mt-1">
+                        Série: {weapon.serial_number}
+                        {weapon.caliber ? ` · Calibre: ${weapon.caliber}` : ''}
+                      </p>
+                    </div>
+                    {weapon.category && (
+                      <span className="text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-full px-3 py-1">
+                        {weapon.category}
+                      </span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </CardBody>
+        </Card>
       </main>
 
       <Modal
@@ -261,6 +374,70 @@ export const ClientDetail = () => {
             onChange={(e) => setForm((p) => ({ ...p, description: e.target.value }))}
             rows={3}
             placeholder="Detalhes do processo"
+          />
+        </div>
+      </Modal>
+
+      <Modal
+        isOpen={weaponModalOpen}
+        onClose={() => setWeaponModalOpen(false)}
+        title="Nova Arma"
+        footer={
+          <>
+            <Button variant="secondary" onClick={() => setWeaponModalOpen(false)}>
+              Cancelar
+            </Button>
+            <Button variant="primary" isLoading={savingWeapon} onClick={handleCreateWeapon}>
+              Cadastrar Arma
+            </Button>
+          </>
+        }
+      >
+        {weaponError && (
+          <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+            {weaponError}
+          </div>
+        )}
+        <div className="space-y-4">
+          <Input
+            label="Número de Série *"
+            value={weaponForm.serial_number}
+            onChange={(e) => setWeaponForm((p) => ({ ...p, serial_number: e.target.value }))}
+            placeholder="Número de série da arma"
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Input
+              label="Modelo"
+              value={weaponForm.model}
+              onChange={(e) => setWeaponForm((p) => ({ ...p, model: e.target.value }))}
+              placeholder="Ex: Taurus G2C"
+            />
+            <Input
+              label="Fabricante"
+              value={weaponForm.manufacturer}
+              onChange={(e) => setWeaponForm((p) => ({ ...p, manufacturer: e.target.value }))}
+              placeholder="Ex: Taurus"
+            />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Input
+              label="Calibre"
+              value={weaponForm.caliber}
+              onChange={(e) => setWeaponForm((p) => ({ ...p, caliber: e.target.value }))}
+              placeholder="Ex: .380"
+            />
+            <Select
+              label="Categoria"
+              value={weaponForm.category}
+              onChange={(e) => setWeaponForm((p) => ({ ...p, category: e.target.value }))}
+              options={CATEGORIES}
+            />
+          </div>
+          <Input
+            label="Número de Registro"
+            value={weaponForm.registration_number}
+            onChange={(e) => setWeaponForm((p) => ({ ...p, registration_number: e.target.value }))}
+            placeholder="Número de registro no Exército"
           />
         </div>
       </Modal>
