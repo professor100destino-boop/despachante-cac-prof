@@ -5,6 +5,7 @@ import { Login } from './pages/Login'
 import { Dashboard } from './pages/Dashboard'
 import { ClientForm } from './pages/ClientForm'
 import { ClientDetail } from './pages/ClientDetail'
+import { KnowledgeBase } from './pages/KnowledgeBase'
 import './index.css'
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -68,6 +69,14 @@ function App() {
           element={
             <ProtectedRoute>
               <ClientDetail />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/base-de-conhecimento"
+          element={
+            <ProtectedRoute>
+              <KnowledgeBase />
             </ProtectedRoute>
           }
         />
