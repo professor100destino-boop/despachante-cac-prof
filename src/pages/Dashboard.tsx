@@ -56,7 +56,7 @@ export const Dashboard = () => {
 
   const handleLogout = async () => {
     await signOut()
-    navigate('/login')
+    window.location.assign(`${import.meta.env.BASE_URL}login`)
   }
 
   const stats = {
