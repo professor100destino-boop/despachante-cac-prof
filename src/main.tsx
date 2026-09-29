@@ -9,14 +9,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   </React.StrictMode>,
 )
 
-// Register service worker for PWA
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker
-    .register('/sw.js')
-    .then((registration) => {
-      console.log('Service Worker registered:', registration)
-    })
-    .catch((error) => {
-      console.log('Service Worker registration failed:', error)
-    })
-}
+// The PWA service worker is already registered automatically by
+// vite-plugin-pwa (see registerSW.js in the built output). Registering it
+// again here with a hardcoded absolute path ('/sw.js') was wrong for a
+// GitHub Pages project site served from a subpath and only produced 404s.
