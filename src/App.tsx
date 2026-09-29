@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useAuthStore } from './store/auth'
 import { Login } from './pages/Login'
 import { Dashboard } from './pages/Dashboard'
+import { ClientForm } from './pages/ClientForm'
+import { ClientDetail } from './pages/ClientDetail'
 import './index.css'
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -53,7 +55,24 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/clients/new"
+          element={
+            <ProtectedRoute>
+              <ClientForm />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/clients/:id"
+          element={
+            <ProtectedRoute>
+              <ClientDetail />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/" element={<Navigate to="/dashboard" />} />
+        <Route path="*" element={<Navigate to="/dashboard" />} />
       </Routes>
     </BrowserRouter>
   )
