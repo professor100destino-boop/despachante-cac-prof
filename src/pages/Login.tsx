@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../store/auth'
 import { Button, Input, Alert, Card } from '../components'
 import { LogIn, Mail, Lock } from 'lucide-react'
 
 export const Login = () => {
-  const navigate = useNavigate()
   const { signIn, error, loading, clearError } = useAuthStore()
 
   const [email, setEmail] = useState('')
@@ -30,7 +28,12 @@ export const Login = () => {
       } else {
         await signIn(email, password)
       }
-      navigate('/dashboard')
+      // Full navigation (instead of client-side router navigation) so the app
+      // re-reads the freshly saved Supabase session from scratch. This avoids
+      // an intermittent bug where the in-memory auth state and the router
+      // could get out of sync right after login, bouncing the user back to
+      // the login screen even though the session was saved correctly.
+      window.location.assign(`${import.meta.env.BASE_URL}dashboard`)
     } catch (err) {
       // Error is already set in store
     }
