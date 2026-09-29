@@ -89,7 +89,9 @@ export const KnowledgeBase = () => {
                   <Card key={article.id}>
                     <CardBody>
                       <h3 className="font-medium text-gray-900 mb-1">{article.title}</h3>
-                      <p className="text-sm text-gray-700 whitespace-pre-line">{article.content}</p>
+                      <p className="text-sm text-gray-700 whitespace-pre-line">
+                        {article.content.replace(/\\n/g, '\n')}
+                      </p>
                       {article.tags && article.tags.length > 0 && (
                         <div className="mt-3 flex flex-wrap gap-2">
                           {article.tags.map((tag) => (
