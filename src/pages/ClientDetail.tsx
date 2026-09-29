@@ -1,8 +1,20 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { ArrowLeft, Plus, FileText, User as UserIcon, Crosshair, AlertTriangle } from 'lucide-react'
-import { supabase, type Client, type Process, type Weapon } from '../supabase'
+import {
+  ArrowLeft,
+  Plus,
+  FileText,
+  User as UserIcon,
+  Crosshair,
+  AlertTriangle,
+  Upload,
+  Download,
+  Trash2,
+  Paperclip,
+} from 'lucide-react'
+import { supabase, type Client, type Process, type Weapon, type Document as ClientDocument } from '../supabase'
 import { Button, Card, CardHeader, CardBody, Modal, Select, TextArea, Input } from '../components'
+import { useAuthStore } from '../store/auth'
 
 const PROCESS_TYPES = [
   { value: 'CAC', label: 'CAC' },
@@ -72,15 +84,29 @@ const DateBadge = ({ label, dateStr }: { label: string; dateStr?: string }) => {
   )
 }
 
+const formatFileSize = (bytes?: number) => {
+  if (!bytes) return ''
+  if (bytes < 1024) return `${bytes} B`
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
+}
+
 export const ClientDetail = () => {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
+  const { user } = useAuthStore()
 
   const [client, setClient] = useState<Client | null>(null)
   const [processes, setProcesses] = useState<Process[]>([])
   const [weapons, setWeapons] = useState<Weapon[]>([])
+  const [documents, setDocuments] = useState<ClientDocument[]>([])
   const [loading, setLoading] = useState(true)
   const [notFound, setNotFound] = useState(false)
+
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const [uploadingDoc, setUploadingDoc] = useState(false)
+  const [docError, setDocError] = useState<string | null>(null)
+  const [deletingDocId, setDeletingDocId] = useState<string | null>(null)
 
   const [modalOpen, setModalOpen] = useState(false)
   const [saving, setSaving] = useState(false)
@@ -144,11 +170,86 @@ export const ClientDetail = () => {
         .order('created_at', { ascending: false })
 
       setWeapons((weaponsData as Weapon[]) || [])
+
+      const { data: documentsData } = await supabase
+        .from('documents')
+        .select('*')
+        .eq('client_id', clientId)
+        .order('uploaded_at', { ascending: false })
+
+      setDocuments((documentsData as ClientDocument[]) || [])
     } catch (err) {
       console.error('Erro ao buscar cliente:', err)
       setNotFound(true)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleUploadDocument = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file || !id || !user) return
+    setDocError(null)
+
+    if (file.size > 20 * 1024 * 1024) {
+      setDocError('O arquivo excede o limite de 20 MB.')
+      if (fileInputRef.current) fileInputRef.current.value = ''
+      return
+    }
+
+    setUploadingDoc(true)
+    try {
+      const sanitizedName = file.name.replace(/[^a-zA-Z0-9.\-_]/g, '_')
+      const storagePath = `${user.id}/${id}/${Date.now()}_${sanitizedName}`
+
+      const { error: uploadError } = await supabase.storage.from('documents').upload(storagePath, file)
+      if (uploadError) throw uploadError
+
+      const { error: insertError } = await supabase.from('documents').insert([
+        {
+          owner_id: user.id,
+          client_id: id,
+          file_name: file.name,
+          file_type: file.type || null,
+          file_size: file.size,
+          storage_path: storagePath,
+        },
+      ])
+      if (insertError) throw insertError
+
+      fetchData(id)
+    } catch (err) {
+      setDocError(err instanceof Error ? err.message : 'Erro ao enviar o documento.')
+    } finally {
+      setUploadingDoc(false)
+      if (fileInputRef.current) fileInputRef.current.value = ''
+    }
+  }
+
+  const handleDownloadDocument = async (doc: ClientDocument) => {
+    try {
+      const { data, error: urlError } = await supabase.storage
+        .from('documents')
+        .createSignedUrl(doc.storage_path, 60)
+      if (urlError || !data) throw urlError || new Error('Não foi possível gerar o link.')
+      window.open(data.signedUrl, '_blank')
+    } catch (err) {
+      console.error('Erro ao baixar documento:', err)
+    }
+  }
+
+  const handleDeleteDocument = async (doc: ClientDocument) => {
+    if (!id) return
+    if (!window.confirm(`Excluir o documento "${doc.file_name}"? Essa ação não pode ser desfeita.`)) return
+    setDeletingDocId(doc.id)
+    try {
+      await supabase.storage.from('documents').remove([doc.storage_path])
+      await supabase.from('documents').delete().eq('id', doc.id)
+      fetchData(id)
+    } catch (err) {
+      console.error('Erro ao excluir documento:', err)
+    } finally {
+      setDeletingDocId(null)
     }
   }
 
@@ -446,6 +547,84 @@ export const ClientDetail = () => {
                           Guia: {TRAFFIC_GUIDE_STATUS.find((s) => s.value === weapon.traffic_guide_status)?.label}
                         </span>
                       )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </CardBody>
+        </Card>
+
+        <Card>
+          <CardHeader
+            title="Documentos"
+            action={
+              <>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  className="hidden"
+                  onChange={handleUploadDocument}
+                />
+                <Button
+                  variant="primary"
+                  size="sm"
+                  icon={<Upload size={16} />}
+                  isLoading={uploadingDoc}
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  Enviar Documento
+                </Button>
+              </>
+            }
+          />
+          <CardBody>
+            {docError && (
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                {docError}
+              </div>
+            )}
+            {documents.length === 0 ? (
+              <div className="text-center py-8">
+                <Paperclip className="mx-auto text-gray-400 mb-3" size={32} />
+                <p className="text-gray-600">Nenhum documento anexado ainda.</p>
+                <p className="text-xs text-gray-400 mt-1">Limite de 20 MB por arquivo.</p>
+              </div>
+            ) : (
+              <div className="space-y-2">
+                {documents.map((doc) => (
+                  <div
+                    key={doc.id}
+                    className="flex items-center justify-between flex-wrap gap-2 p-3 bg-gray-50 rounded-lg"
+                  >
+                    <div className="flex items-center gap-2 min-w-0">
+                      <FileText className="text-gray-400 shrink-0" size={18} />
+                      <div className="min-w-0">
+                        <p className="font-medium text-gray-900 truncate">{doc.file_name}</p>
+                        <p className="text-xs text-gray-500">
+                          {formatFileSize(doc.file_size)}
+                          {doc.uploaded_at ? ` · ${formatDate(doc.uploaded_at)}` : ''}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex gap-2 shrink-0">
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        icon={<Download size={14} />}
+                        onClick={() => handleDownloadDocument(doc)}
+                      >
+                        Baixar
+                      </Button>
+                      <Button
+                        variant="danger"
+                        size="sm"
+                        icon={<Trash2 size={14} />}
+                        isLoading={deletingDocId === doc.id}
+                        onClick={() => handleDeleteDocument(doc)}
+                      >
+                        Excluir
+                      </Button>
                     </div>
                   </div>
                 ))}
